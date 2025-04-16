@@ -40,7 +40,7 @@ const Title = styled.p`
 
 const Category = styled.div`
   display: flex;
-  margin-left: 200px;
+  margin-left: 300px;
   font-family: "Nanum1";
 `;
 
