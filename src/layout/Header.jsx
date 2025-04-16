@@ -28,10 +28,12 @@ const HeaderArea = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 999;
+  background-color: white;
 `;
 
 const Title = styled.p`
-  margin-left: 5%;
+  margin-left: 3%;
   font-family: "Nanum1";
   font-size: 20px;
 `;
@@ -48,7 +50,7 @@ const EachCate = styled.div`
 `;
 
 const SearchArea = styled.div`
-  margin-right: 5%;
+  margin-right: 3%;
   display: flex;
   position: relative;
 `;
@@ -57,7 +59,7 @@ const SearchBar = styled.input`
   width: 360px;
   height: 39px;
   border-radius: 20px;
-  margin-right: 5%;
+  // margin-right: 5%;
   border: 1px solid rgba(216, 216, 216, 1);
   font-family: "Nanum1";
 `;
