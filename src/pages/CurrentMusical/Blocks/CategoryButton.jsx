@@ -43,7 +43,7 @@ const Gimg = styled.img`
 const Gtext = styled.p`
   margin-top: 0px;
   font-size: 9px;
-  color: ${({ active }) => (active ? "black" : "#8d8d8d")};
+  color: ${({ $active }) => ($active ? "black" : "#8d8d8d")};
 `;
 const LocButton = styled.div`
   width: 35px;
@@ -60,5 +60,5 @@ const Locimg = styled.img`
 const Loctext = styled.p`
   font-size: 9px;
   margin-top: 0px;
-  color: ${({ active }) => (active ? "black" : "#8d8d8d")};
+  color: ${({ $active }) => ($active ? "black" : "#8d8d8d")};
 `;
