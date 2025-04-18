@@ -1,63 +1,63 @@
-const genreDummy = {
-  뮤지컬: [
+const locDummy = {
+  서울: [
     {
-      id: 1,
+      id: 11,
       category: "뮤지컬",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 2,
+      id: 12,
       category: "뮤지컬",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 3,
+      id: 13,
       category: "뮤지컬",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 4,
+      id: 14,
       category: "뮤지컬",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 5,
+      id: 15,
       category: "뮤지컬",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
   ],
-  연극: [
+  인천: [
     {
-      id: 6,
+      id: 16,
       category: "연극",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 7,
+      id: 17,
       category: "연극",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 8,
+      id: 18,
       category: "연극",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 9,
+      id: 19,
       category: "연극",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
     },
     {
-      id: 10,
+      id: 20,
       category: "연극",
       title: "베어 더 뮤지컬",
       date: "2025.06.13~2025.09.14",
@@ -65,4 +65,4 @@ const genreDummy = {
   ],
 };
 
-export default genreDummy;
+export default locDummy;
