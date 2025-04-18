@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SidePage from "./SidePage";
 import { useState } from "react";
 import CategoryButton from "./Blocks/CategoryButton";
-
+import SliceArea from "./Blocks/SliceArea";
 const CurMusicalPage = () => {
   const [genreClick, setGenreClick] = useState(true);
   const [locClick, setLocClick] = useState(false);
@@ -28,6 +28,7 @@ const CurMusicalPage = () => {
           onClickLoc={onClickLoc}
           onClickGenre={onClickGenre}
         />
+        <SliceArea dataType={genreClick ? "genre" : "loc"} />
       </ContentsArea>
     </Screen>
   );
