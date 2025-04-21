@@ -37,16 +37,15 @@ const CurMusicalPage = () => {
 export default CurMusicalPage;
 
 const Screen = styled.div`
-  width: 100vw;
   display: flex;
-  // 좌우 스크롤 방지
-  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden; // 스크롤 방지
 `;
 
 const ContentsArea = styled.div`
   margin-left: 27%;
-  width: 100%;
-  height: 3000px;
+  width: 73%;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; // 내부 요소가 튀어나가는 것 방지
 `;
