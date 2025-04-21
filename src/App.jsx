@@ -1,10 +1,11 @@
-import "./App.css";
 import styled from "styled-components";
 import Header from "./layout/Header";
+import CurMusicalPage from "./pages/CurrentMusical/CurMusicalPage";
 function App() {
   return (
     <Screen>
       <Header />
+      <CurMusicalPage />
     </Screen>
   );
 }
@@ -18,4 +19,5 @@ const Screen = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 62px;
 `;
