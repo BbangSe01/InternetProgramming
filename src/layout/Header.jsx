@@ -6,8 +6,8 @@ const Header = () => {
     <HeaderArea>
       <Title>MUDAE for</Title>
       <Category>
-        <EachCate>상영 예정작</EachCate>
-        <EachCate>공연 일정</EachCate>
+        <EachCate>공연 둘러보기</EachCate>
+        <EachCate>티켓팅</EachCate>
       </Category>
       <SearchArea>
         <SearchBar />
