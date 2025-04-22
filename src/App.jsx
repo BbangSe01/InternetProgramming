@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import Header from "./layout/Header";
 import CurMusicalPage from "./pages/CurrentMusical/CurMusicalPage";
+import DetailPage from "./pages/Detail/DetailPage";
+import TicketingPage from "./pages/Ticketing/TicketingPage";
+import { BrowserRouter, Routes, Route } from "react-router";
 function App() {
   return (
-    <Screen>
-      <Header />
-      <CurMusicalPage />
-    </Screen>
+    <BrowserRouter>
+      <Screen>
+        <Header />
+        <Routes>
+          <Route path="/" element={<CurMusicalPage />}></Route>
+          <Route path="/DetailPage" element={<DetailPage />}></Route>
+          <Route path="/TicketingPage" element={<TicketingPage />}></Route>
+        </Routes>
+      </Screen>
+    </BrowserRouter>
   );
 }
 
