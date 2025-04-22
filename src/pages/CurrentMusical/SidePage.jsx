@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import SidebarImg from "../../assets/images/sideMusical.svg";
+import { useNavigate } from "react-router-dom";
 const SidePage = () => {
+  const navigate = useNavigate();
+
+  const goToDetail = () => {
+    navigate("/DetailPage");
+  };
+
   return (
-    <SideArea>
+    <SideArea onClick={() => goToDetail()}>
       <SideImg src={SidebarImg} alt="사이드바 이미지" />
       <Explaination>
         <SideCate>뮤지컬</SideCate>

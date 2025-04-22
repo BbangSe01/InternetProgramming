@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import dummyImg from "../../../../assets/images/dummyImg.svg";
+import { useNavigate } from "react-router-dom";
 const SliceCard = ({ data }) => {
+  const navigate = useNavigate();
+
+  const goToDetail = () => {
+    navigate("/DetailPage");
+  };
+
   return (
-    <Card>
+    <Card onClick={() => goToDetail()}>
       <CardImg src={dummyImg} alt="포스터" />
       <CardCate>{data.category}</CardCate>
       <CardTitle>{data.title}</CardTitle>
