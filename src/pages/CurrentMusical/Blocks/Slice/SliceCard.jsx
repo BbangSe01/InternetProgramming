@@ -21,6 +21,7 @@ const Card = styled.div`
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 5px 5px 10px gray;
+  cursor: pointer;
 `;
 
 const CardImg = styled.img`

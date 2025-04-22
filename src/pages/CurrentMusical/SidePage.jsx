@@ -24,6 +24,7 @@ const SideArea = styled.div`
   top: 70px;
   left: 0;
   box-shadow: 5px 5px 18px gray;
+  cursor: pointer;
 `;
 
 const SideImg = styled.img`

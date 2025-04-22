@@ -47,6 +47,7 @@ const Category = styled.div`
 const EachCate = styled.div`
   margin-right: 70px;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 const SearchArea = styled.div`
