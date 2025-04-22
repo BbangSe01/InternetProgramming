@@ -35,6 +35,7 @@ const GenreButton = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 const Gimg = styled.img`
   width: 35px;
@@ -51,6 +52,7 @@ const LocButton = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Locimg = styled.img`

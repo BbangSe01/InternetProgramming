@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import SidebarImg from "../../assets/images/sideMusical.svg";
+import { useNavigate } from "react-router-dom";
 const SidePage = () => {
+  const navigate = useNavigate();
+
+  const goToDetail = () => {
+    navigate("/DetailPage");
+  };
+
   return (
-    <SideArea>
+    <SideArea onClick={() => goToDetail()}>
       <SideImg src={SidebarImg} alt="사이드바 이미지" />
       <Explaination>
         <SideCate>뮤지컬</SideCate>
@@ -24,6 +31,7 @@ const SideArea = styled.div`
   top: 70px;
   left: 0;
   box-shadow: 5px 5px 18px gray;
+  cursor: pointer;
 `;
 
 const SideImg = styled.img`
