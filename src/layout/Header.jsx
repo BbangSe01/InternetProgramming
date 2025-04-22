@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import searchIcon from "../assets/images/searchIcon.svg";
 const Header = () => {
   return (
     <HeaderArea>
       <Title>MUDAE for</Title>
       <Category>
-        <EachCate>공연 둘러보기</EachCate>
-        <EachCate>티켓팅</EachCate>
+        <EachCate>
+          <Link to="/">공연 둘러보기</Link>
+        </EachCate>
+        <EachCate>
+          <Link to="/TicketingPage">티켓팅</Link>
+        </EachCate>
       </Category>
       <SearchArea>
         <SearchBar />
@@ -48,6 +53,11 @@ const EachCate = styled.div`
   margin-right: 70px;
   font-size: 16px;
   cursor: pointer;
+
+  a {
+    color: black; // 글씨색 변경
+    text-decoration: none; // 밑줄 제거
+  }
 `;
 
 const SearchArea = styled.div`
