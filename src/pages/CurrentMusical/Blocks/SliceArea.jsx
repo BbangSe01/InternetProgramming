@@ -61,7 +61,7 @@ const SliceArea = ({ dataType }) => {
             slidesPerView={3.8}
             style={{
               width: "90%",
-              height: "330px",
+              height: "365px",
               marginLeft: "0px",
             }}
           >
@@ -71,6 +71,7 @@ const SliceArea = ({ dataType }) => {
               </SwiperSlide>
             ))}
           </Swiper>
+          <MoreButton>더보기</MoreButton>
         </EachSlice>
       ))}
     </Screen>
@@ -90,9 +91,23 @@ const EachSlice = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 62px;
+  position: relative; // 슬라이드 기준 포지셔닝을 위해 추가
 `;
 
 const SliceCate = styled.p`
   font-size: 32px;
   margin-right: 20px;
+`;
+
+const MoreButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 11%;
+  z-index: 10; // 다른 요소들이 위에 떠있어서 인식 못하는 걸 방지
+  font-size: 18px;
+  &:hover {
+    color: #ff6347; // 원하는 색으로 변경 (예: tomato)
+  }
 `;
