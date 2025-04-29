@@ -11,8 +11,12 @@ const SliceArea = ({ dataType }) => {
 
   const navigate = useNavigate();
 
-  const goToMorePage = () => {
-    navigate("/MorePage");
+  const goToMorePage = ({ c }) => {
+    navigate("/MorePage", {
+      state: {
+        category: `${c}`,
+      },
+    });
   };
 
   const getGenreData = async (genre) => {
@@ -65,7 +69,6 @@ const SliceArea = ({ dataType }) => {
     }
   }, [dataType]);
 
-  console.log(data);
   return (
     <Screen>
       {categoryList.map((c) => (
@@ -86,7 +89,7 @@ const SliceArea = ({ dataType }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <MoreButton onClick={() => goToMorePage()}>더보기</MoreButton>
+          <MoreButton onClick={() => goToMorePage({ c })}>더보기</MoreButton>
         </EachSlice>
       ))}
     </Screen>

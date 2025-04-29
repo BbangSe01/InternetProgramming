@@ -1,7 +1,11 @@
 import React from "react";
-
+import { useLocation } from "react-router-dom";
 const MorePage = () => {
-  // const {
+  const location = useLocation();
+
+  const getCategory = location.state.category;
+
+  console.log(getCategory); // const {
   //   data: playData,
   //   isLoading: pLoading,
   //   error: pError,
