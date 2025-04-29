@@ -5,18 +5,49 @@ import styled from "styled-components";
 import genreDummy from "../../../test/genreDummy";
 import locDummy from "../../../test/locDummy";
 import SliceCard from "./Slice/SliceCard";
-
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "../../../apis/axiosInstance";
 const SliceArea = ({ dataType }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [categoryList, setCategoryList] = useState([]);
 
+  const getGenreData = async (genre) => {
+    try {
+      const response = await axiosInstance.get(
+        `genre/performances?genre=${genre}&page=1`
+      );
+      setData((prevData) => ({
+        ...prevData,
+        [genre]: response.data,
+      }));
+    } catch (error) {
+      console.error("데이터 에러:", error);
+    }
+  };
+
+  const getLocData = async (loc) => {
+    try {
+      const response = await axiosInstance.get(
+        `area/performances?area=${loc}&page=1`
+      );
+      setData((prevData) => ({
+        ...prevData,
+        [loc]: response.data,
+      }));
+    } catch (error) {
+      console.error("데이터 에러:", error);
+    }
+  };
   useEffect(() => {
+    setData({});
     if (dataType === "genre") {
-      setData(genreDummy);
       setCategoryList(["뮤지컬", "연극"]);
+      getGenreData("연극");
+      getGenreData("뮤지컬");
     } else if (dataType === "loc") {
-      setData(locDummy);
-      setCategoryList(["서울", "인천"]);
+      setCategoryList(["서울", "경기"]);
+      getLocData("서울");
+      getLocData("경기");
     }
   }, [dataType]);
 
@@ -31,12 +62,11 @@ const SliceArea = ({ dataType }) => {
             style={{
               width: "90%",
               height: "330px",
-              // backgroundColor: "black",
               marginLeft: "0px",
             }}
           >
-            {data[c]?.map((d) => (
-              <SwiperSlide key={d.id}>
+            {data[c]?.performances?.map((d) => (
+              <SwiperSlide key={d.performId}>
                 <SliceCard data={d} />
               </SwiperSlide>
             ))}
