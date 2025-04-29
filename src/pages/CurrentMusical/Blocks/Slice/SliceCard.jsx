@@ -47,15 +47,16 @@ const CardCate = styled.p`
 `;
 
 const CardTitle = styled.p`
-  font-size: 12px;
+  font-size: 16px;
   margin-left: 9px;
   margin-bottom: 12px;
-  text-overflow: ellipsis; // 넘치는 텍스트는 "..."으로 표시
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const CardDate = styled.p`
-  margin-top: -5px;
-  font-size: 10px;
+  font-size: 12px;
   margin-left: 9px;
   color: #8d8d8d;
 `;
