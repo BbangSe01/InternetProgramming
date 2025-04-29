@@ -28,7 +28,7 @@ const CurMusicalPage = () => {
           onClickLoc={onClickLoc}
           onClickGenre={onClickGenre}
         />
-        <SliceArea dataType={genreClick ? "genre" : "loc"} />
+        <SliceArea dataType={genreClick ? "genre" : "area"} />
       </ContentsArea>
     </Screen>
   );

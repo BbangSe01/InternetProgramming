@@ -11,9 +11,10 @@ const SliceArea = ({ dataType }) => {
 
   const navigate = useNavigate();
 
-  const goToMorePage = ({ c }) => {
+  const goToMorePage = ({ c, dataType }) => {
     navigate("/MorePage", {
       state: {
+        type: `${dataType}`,
         category: `${c}`,
       },
     });
@@ -61,7 +62,7 @@ const SliceArea = ({ dataType }) => {
       getGenreData("한국 국악");
       getGenreData("대중 음악");
       getGenreData("서양 클래식");
-    } else if (dataType === "loc") {
+    } else if (dataType === "area") {
       setCategoryList(["서울", "경기", "인천"]);
       getLocData("서울");
       getLocData("경기");
@@ -89,7 +90,9 @@ const SliceArea = ({ dataType }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <MoreButton onClick={() => goToMorePage({ c })}>더보기</MoreButton>
+          <MoreButton onClick={() => goToMorePage({ c, dataType })}>
+            더보기
+          </MoreButton>
         </EachSlice>
       ))}
     </Screen>
