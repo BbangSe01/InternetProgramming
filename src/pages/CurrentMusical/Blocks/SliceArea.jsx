@@ -41,16 +41,27 @@ const SliceArea = ({ dataType }) => {
   useEffect(() => {
     setData({});
     if (dataType === "genre") {
-      setCategoryList(["뮤지컬", "연극"]);
+      setCategoryList([
+        "뮤지컬",
+        "연극",
+        "한국 국악",
+        "대중 음악",
+        "서양 클래식",
+      ]);
       getGenreData("연극");
       getGenreData("뮤지컬");
+      getGenreData("한국 국악");
+      getGenreData("대중 음악");
+      getGenreData("서양 클래식");
     } else if (dataType === "loc") {
-      setCategoryList(["서울", "경기"]);
+      setCategoryList(["서울", "경기", "인천"]);
       getLocData("서울");
       getLocData("경기");
+      getLocData("인천");
     }
   }, [dataType]);
 
+  console.log(data);
   return (
     <Screen>
       {categoryList.map((c) => (
