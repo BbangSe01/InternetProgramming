@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Header from "./layout/Header";
 import CurMusicalPage from "./pages/CurrentMusical/CurMusicalPage";
 import DetailPage from "./pages/Detail/DetailPage";
@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider cliend={qeuryClient}>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Screen>
           <Header />
