@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import dummyImg from "../../../../assets/images/dummyImg.svg";
 import { useNavigate } from "react-router-dom";
-const SliceCard = ({ data }) => {
+const SliceCard = (data) => {
   const navigate = useNavigate();
 
   const goToDetail = () => {
@@ -11,10 +11,12 @@ const SliceCard = ({ data }) => {
 
   return (
     <Card onClick={() => goToDetail()}>
-      <CardImg src={dummyImg} alt="포스터" />
-      <CardCate>{data.category}</CardCate>
-      <CardTitle>{data.title}</CardTitle>
-      <CardDate>{data.date}</CardDate>
+      <CardImg src={data.data.posterUrl} alt="포스터" />
+      <CardCate>{data.data.genreName}</CardCate>
+      <CardTitle>{data.data.performName}</CardTitle>
+      <CardDate>
+        {data.data.startDate}-{data.data.endDate}
+      </CardDate>
     </Card>
   );
 };
@@ -45,13 +47,15 @@ const CardCate = styled.p`
 `;
 
 const CardTitle = styled.p`
-  font-size: 16px;
+  font-size: 12px;
   margin-left: 9px;
   margin-bottom: 12px;
+  text-overflow: ellipsis; // 넘치는 텍스트는 "..."으로 표시
 `;
 
 const CardDate = styled.p`
-  font-size: 12px;
+  margin-top: -5px;
+  font-size: 10px;
   margin-left: 9px;
   color: #8d8d8d;
 `;
