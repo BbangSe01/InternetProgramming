@@ -4,6 +4,7 @@ import Header from "./layout/Header";
 import CurMusicalPage from "./pages/CurrentMusical/CurMusicalPage";
 import DetailPage from "./pages/Detail/DetailPage";
 import TicketingPage from "./pages/Ticketing/TicketingPage";
+import MorePage from "./pages/morePage/MorePage";
 import { BrowserRouter, Routes, Route } from "react-router";
 
 const queryClient = new QueryClient();
@@ -15,9 +16,10 @@ function App() {
         <Screen>
           <Header />
           <Routes>
-            <Route path="/" element={<CurMusicalPage />}></Route>
-            <Route path="/DetailPage" element={<DetailPage />}></Route>
-            <Route path="/TicketingPage" element={<TicketingPage />}></Route>
+            <Route path="/" element={<CurMusicalPage />} />
+            <Route path="/DetailPage" element={<DetailPage />} />
+            <Route path="/TicketingPage" element={<TicketingPage />} />
+            <Route path="/MorePage" element={<MorePage />} />
           </Routes>
         </Screen>
       </BrowserRouter>

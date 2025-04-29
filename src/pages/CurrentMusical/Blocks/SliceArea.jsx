@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import styled from "styled-components";
-import genreDummy from "../../../test/genreDummy";
-import locDummy from "../../../test/locDummy";
 import SliceCard from "./Slice/SliceCard";
-import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../../apis/axiosInstance";
+import { useNavigate } from "react-router-dom";
 const SliceArea = ({ dataType }) => {
   const [data, setData] = useState({});
   const [categoryList, setCategoryList] = useState([]);
+
+  const navigate = useNavigate();
+
+  const goToMorePage = () => {
+    navigate("/MorePage");
+  };
 
   const getGenreData = async (genre) => {
     try {
@@ -82,7 +86,7 @@ const SliceArea = ({ dataType }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <MoreButton>더보기</MoreButton>
+          <MoreButton onClick={() => goToMorePage()}>더보기</MoreButton>
         </EachSlice>
       ))}
     </Screen>
