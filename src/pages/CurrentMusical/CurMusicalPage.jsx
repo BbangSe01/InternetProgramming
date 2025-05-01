@@ -40,6 +40,7 @@ const Screen = styled.div`
   display: flex;
   width: 100%;
   overflow-x: hidden; // 스크롤 방지
+  font-family: "Nanum1";
 `;
 
 const ContentsArea = styled.div`
