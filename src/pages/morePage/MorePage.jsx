@@ -5,8 +5,7 @@ import MoreCard from "../CurrentMusical/Blocks/Slice/MoreCard";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getCateData from "../../hooks/getCateData";
-import genreDummy from "../../test/genreDummy";
-import DummyImage from "../../assets/images/dummyImg.svg";
+import loadingSpinner from "../../assets/images/loading.gif";
 
 const MorePage = () => {
   const location = useLocation();
@@ -53,6 +52,7 @@ const MorePage = () => {
     }
   }, [inView, hasNextPage, isFetchNextPage, fetchNextPage]);
 
+  if (isLoading || isFetchNextPage) console.log(true);
   return (
     <Screen>
       <Title>{getCategory}</Title>
@@ -91,6 +91,11 @@ const InfiniteArea = styled.div`
 `;
 
 const ObserverTag = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 10px;
+  height: 10px;
+`;
+
+const LoadingSpinner = styled.img`
+  width: 100px;
+  height: 100px;
 `;
