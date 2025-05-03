@@ -1,31 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import dummyImg from "../../../../assets/images/dummyImg.svg";
-import { useNavigate } from "react-router-dom";
-const SliceCard = (data) => {
-  const navigate = useNavigate();
+import Dimg from "../../../../assets/images/dummyImg.svg";
 
-  const goToDetail = () => {
-    navigate("/DetailPage");
-  };
-
+const MoreCard = (data) => {
+  console.log(data);
   return (
-    <Card onClick={() => goToDetail()}>
+    <Card>
       <CardImg src={data.data.posterUrl} alt="포스터" />
       <CardCate>{data.data.genreName}</CardCate>
       <CardTitle>{data.data.performName}</CardTitle>
       <CardDate>
-        {data.data.startDate}-{data.data.endDate}
+        {data.data.startDate}~{data.data.endDate}
       </CardDate>
     </Card>
   );
 };
 
-export default SliceCard;
+export default MoreCard;
 
 const Card = styled.div`
-  width: 200px;
-  height: 315px;
+  width: 253px;
+  height: 458px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 125px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -34,8 +32,8 @@ const Card = styled.div`
 `;
 
 const CardImg = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 253px;
+  height: 320px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;
@@ -43,13 +41,14 @@ const CardImg = styled.img`
 const CardCate = styled.p`
   font-size: 12px;
   margin-left: 9px;
-  margin-bottom: -5px;
+  margin-top: 20px;
+  // margin-bottom: 15px;
 `;
 
 const CardTitle = styled.p`
   font-size: 16px;
   margin-left: 9px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

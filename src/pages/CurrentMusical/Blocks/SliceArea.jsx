@@ -2,21 +2,71 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import styled from "styled-components";
-import genreDummy from "../../../test/genreDummy";
-import locDummy from "../../../test/locDummy";
 import SliceCard from "./Slice/SliceCard";
-
+import axiosInstance from "../../../apis/axiosInstance";
+import { useNavigate } from "react-router-dom";
 const SliceArea = ({ dataType }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [categoryList, setCategoryList] = useState([]);
 
+  const navigate = useNavigate();
+
+  const goToMorePage = ({ c, dataType }) => {
+    navigate("/MorePage", {
+      state: {
+        type: `${dataType}`,
+        category: `${c}`,
+      },
+    });
+  };
+
+  const getGenreData = async (genre) => {
+    try {
+      const response = await axiosInstance.get(
+        `genre/performances?genre=${genre}&page=1`
+      );
+      setData((prevData) => ({
+        ...prevData,
+        [genre]: response.data,
+      }));
+    } catch (error) {
+      console.error("데이터 에러:", error);
+    }
+  };
+
+  const getLocData = async (loc) => {
+    try {
+      const response = await axiosInstance.get(
+        `area/performances?area=${loc}&page=1`
+      );
+      setData((prevData) => ({
+        ...prevData,
+        [loc]: response.data,
+      }));
+    } catch (error) {
+      console.error("데이터 에러:", error);
+    }
+  };
   useEffect(() => {
+    setData({});
     if (dataType === "genre") {
-      setData(genreDummy);
-      setCategoryList(["뮤지컬", "연극"]);
-    } else if (dataType === "loc") {
-      setData(locDummy);
-      setCategoryList(["서울", "인천"]);
+      setCategoryList([
+        "뮤지컬",
+        "연극",
+        "한국 국악",
+        "대중 음악",
+        "서양 클래식",
+      ]);
+      getGenreData("연극");
+      getGenreData("뮤지컬");
+      getGenreData("한국 국악");
+      getGenreData("대중 음악");
+      getGenreData("서양 클래식");
+    } else if (dataType === "area") {
+      setCategoryList(["서울", "경기", "인천"]);
+      getLocData("서울");
+      getLocData("경기");
+      getLocData("인천");
     }
   }, [dataType]);
 
@@ -30,17 +80,19 @@ const SliceArea = ({ dataType }) => {
             slidesPerView={3.8}
             style={{
               width: "90%",
-              height: "330px",
-              // backgroundColor: "black",
+              height: "365px",
               marginLeft: "0px",
             }}
           >
-            {data[c]?.map((d) => (
-              <SwiperSlide key={d.id}>
+            {data[c]?.performances?.map((d) => (
+              <SwiperSlide key={d.performId}>
                 <SliceCard data={d} />
               </SwiperSlide>
             ))}
           </Swiper>
+          <MoreButton onClick={() => goToMorePage({ c, dataType })}>
+            더보기
+          </MoreButton>
         </EachSlice>
       ))}
     </Screen>
@@ -60,9 +112,23 @@ const EachSlice = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 62px;
+  position: relative; // 슬라이드 기준 포지셔닝을 위해 추가
 `;
 
 const SliceCate = styled.p`
   font-size: 32px;
   margin-right: 20px;
+`;
+
+const MoreButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 11%;
+  z-index: 10; // 다른 요소들이 위에 떠있어서 인식 못하는 걸 방지
+  font-size: 18px;
+  &:hover {
+    color: #ff6347; // 원하는 색으로 변경 (예: tomato)
+  }
 `;
