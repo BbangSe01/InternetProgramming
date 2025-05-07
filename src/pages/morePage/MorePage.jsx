@@ -20,7 +20,7 @@ const MorePage = () => {
     error,
     hasNextPage,
     fetchNextPage,
-    isFetchNextPage,
+    isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [{ getType }, { getCategory }],
     queryFn: ({ pageParam }) => {
@@ -44,15 +44,19 @@ const MorePage = () => {
   });
 
   useEffect(() => {
-    if (inView && hasNextPage && !isFetchNextPage) {
+    if (inView && hasNextPage && !isFetchingNextPage) {
       console.log("🔥 Fetching next page...");
       fetchNextPage();
     } else {
-      console.log("📌 조건 미충족:", { inView, hasNextPage, isFetchNextPage });
+      console.log("📌 조건 미충족:", {
+        inView,
+        hasNextPage,
+        isFetchingNextPage,
+      });
     }
-  }, [inView, hasNextPage, isFetchNextPage, fetchNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  if (isLoading || isFetchNextPage) console.log(true);
+  if (isLoading || isFetchingNextPage) console.log(true);
   return (
     <Screen>
       <Title>{getCategory}</Title>
@@ -63,6 +67,7 @@ const MorePage = () => {
           ))
         )}
       </InfiniteArea>
+      {isLoading || isFetchingNextPage ? <img src={loadingSpinner} /> : null}
       <ObserverTag ref={ref} />
     </Screen>
   );
