@@ -19,7 +19,7 @@ const Header = () => {
       localStorage.removeItem("accessToken");
       setIsLogIn(false);
       alert("로그아웃 되었습니다.");
-      navigate("/");
+      window.location.href = "/";
     } else {
       try {
         const response = await axiosInstance.get(`/google/login`);

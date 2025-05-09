@@ -40,7 +40,6 @@ const LoginPage = () => {
       } catch (error) {
         console.error("❌ 로그인 처리 실패:", error);
         alert("로그인 처리에 실패했습니다. 다시 시도해주세요.");
-        alert({ code });
         navigate("/");
       }
     };
