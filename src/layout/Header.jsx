@@ -1,23 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Heart from "../assets/images/Heart.svg";
 import searchIcon from "../assets/images/searchIcon.svg";
 const Header = () => {
   return (
     <HeaderArea>
       <Title>MUDAE for</Title>
       <Category>
-        <EachCate>
+        <Performances>
           <Link to="/">공연 둘러보기</Link>
-        </EachCate>
-        <EachCate>
-          <Link to="/TicketingPage">티켓팅</Link>
-        </EachCate>
+        </Performances>
+        <Sites>
+          <Link to="/TicketingPage">예매 사이트</Link>
+        </Sites>
+        <Login>로그인</Login>
+        <Favorites>
+          <img src={Heart} alt="즐겨찾기" />
+        </Favorites>
       </Category>
-      <SearchArea>
+      {/* <SearchArea>
         <SearchBar />
         <SearchIcon src={searchIcon} alt="돋보기 이미지" />
-      </SearchArea>
+      </SearchArea> */}
     </HeaderArea>
   );
 };
@@ -45,19 +50,50 @@ const Title = styled.p`
 
 const Category = styled.div`
   display: flex;
-  margin-left: 300px;
+  font-size: 15px;
   font-family: "Nanum1";
+  margin-right: 35px;
 `;
 
-const EachCate = styled.div`
-  margin-right: 70px;
-  font-size: 16px;
+const Performances = styled.div`
+  width: 117px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid black;
   cursor: pointer;
-
   a {
     color: black; // 글씨색 변경
     text-decoration: none; // 밑줄 제거
   }
+`;
+
+const Sites = styled.div`
+  width: 101px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid black;
+  cursor: pointer;
+  a {
+    color: black; // 글씨색 변경
+    text-decoration: none; // 밑줄 제거
+  }
+`;
+
+const Login = styled.div`
+  cursor: pointer;
+  padding-left: 14px;
+  padding-right: 14px;
+`;
+const Favorites = styled.div`
+  width: 47px;
+  height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 2px solid black;
+  cursor: pointer;
 `;
 
 const SearchArea = styled.div`
