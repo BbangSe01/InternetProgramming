@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../apis/axiosInstance";
 import Heart from "../assets/images/Heart.svg";
 import searchIcon from "../assets/images/searchIcon.svg";
+
 const Header = () => {
+  const navigate = useNavigate();
+  const [isLogin, setIsLogIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setIsLogIn(!!token);
+  }, []);
+
+  const handleLoginOut = async () => {
+    if (isLogin) {
+      localStorage.removeItem("accessToken");
+      setIsLogIn(false);
+      alert("로그아웃 되었습니다.");
+      navigate("/");
+    } else {
+      try {
+        const response = await axiosInstance.get(`/google/login`);
+        const loginUrl = response.data.url;
+        window.location.href = loginUrl; // 구글 로그인 페이지로 이동
+      } catch (error) {
+        console.error("❌ 로그인 URL 요청 실패:", error);
+        alert("로그인 요청에 실패했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
   return (
     <HeaderArea>
       <Title>MUDAE for</Title>
@@ -14,11 +42,16 @@ const Header = () => {
         <Sites>
           <Link to="/TicketingPage">예매 사이트</Link>
         </Sites>
-        <Login>로그인</Login>
-        <Favorites>
-          <img src={Heart} alt="즐겨찾기" />
-        </Favorites>
+        <Login onClick={handleLoginOut}>
+          {isLogin ? "로그아웃" : "로그인"}
+        </Login>
+        {isLogin ? (
+          <Favorites>
+            <img src={Heart} alt="즐겨찾기" />
+          </Favorites>
+        ) : null}
       </Category>
+      {/**추후 검색 기능이 추가될 수 있어 남겨놨습니다.*/}
       {/* <SearchArea>
         <SearchBar />
         <SearchIcon src={searchIcon} alt="돋보기 이미지" />
