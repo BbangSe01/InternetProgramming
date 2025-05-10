@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 const SliceCard = (data) => {
   const navigate = useNavigate();
 
-  const goToDetail = () => {
-    navigate("/DetailPage");
+  const goToDetail = (performId) => {
+    navigate(`/DetailPage/${performId}`);
   };
 
   return (
-    <Card onClick={() => goToDetail()}>
+    <Card onClick={() => goToDetail(data.data.performId)}>
       <CardImg src={data.data.posterUrl} alt="포스터" />
       <CardCate>{data.data.genreName}</CardCate>
       <CardTitle>{data.data.performName}</CardTitle>
