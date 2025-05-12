@@ -78,7 +78,7 @@ const HeaderArea = styled.div`
 const Title = styled.p`
   margin-left: 3%;
   font-family: "Nanum1";
-  font-size: 20px;
+  font-size: 24px;
 `;
 
 const Category = styled.div`
