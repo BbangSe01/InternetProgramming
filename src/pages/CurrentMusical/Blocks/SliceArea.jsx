@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Scrollbar } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/scrollbar";
 import styled from "styled-components";
 import SliceCard from "./Slice/SliceCard";
 import axiosInstance from "../../../apis/axiosInstance";
@@ -74,13 +76,20 @@ const SliceArea = ({ dataType }) => {
     <Screen>
       {categoryList.map((c) => (
         <EachSlice key={c}>
-          <SliceCate>{c}</SliceCate>
+          <NameAndButton>
+            <SliceCate>{c}</SliceCate>
+            <MoreButton onClick={() => goToMorePage({ c, dataType })}>
+              더보기
+            </MoreButton>
+          </NameAndButton>
           <Swiper
+          modules={[Scrollbar]}
             spaceBetween={30}
             slidesPerView={3.8}
+            scrollbar={{ draggable: true }}
             style={{
               width: "90%",
-              height: "365px",
+              height: "360px",
               marginLeft: "0px",
             }}
           >
@@ -90,9 +99,6 @@ const SliceArea = ({ dataType }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <MoreButton onClick={() => goToMorePage({ c, dataType })}>
-            더보기
-          </MoreButton>
         </EachSlice>
       ))}
     </Screen>
@@ -112,9 +118,17 @@ const EachSlice = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 62px;
-  position: relative; // 슬라이드 기준 포지셔닝을 위해 추가
+  height: 520px;
+  // position: relative; // 슬라이드 기준 포지셔닝을 위해 추가
 `;
 
+const NameAndButton = styled.div`
+  width: 90%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 const SliceCate = styled.p`
   font-size: 32px;
   margin-right: 20px;
@@ -122,13 +136,8 @@ const SliceCate = styled.p`
 
 const MoreButton = styled.div`
   cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-right: 11%;
-  z-index: 10; // 다른 요소들이 위에 떠있어서 인식 못하는 걸 방지
   font-size: 18px;
   &:hover {
-    color: #ff6347; // 원하는 색으로 변경 (예: tomato)
+    color: #ff6347;
   }
 `;
