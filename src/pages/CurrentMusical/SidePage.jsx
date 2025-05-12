@@ -20,7 +20,7 @@ const SidePage = () => {
       try {
         const response = await axiosInstance.get("ranks");
         console.log(response);
-        const topFiveRanks = response.data.ranks.slice(0, 4);
+        const topFiveRanks = response.data.ranks.slice(0, 5);
         setRankData(topFiveRanks);
       } catch (error) {
         console.error("데이터 에러:", error);
@@ -37,7 +37,7 @@ const SidePage = () => {
         key={rankData.length}
         modules={[Autoplay, EffectFade]}
         autoplay={{
-          delay: 5000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         effect="fade"
@@ -88,7 +88,7 @@ const SlideWrapper = styled.div`
 `;
 
 const Explaination = styled.div`
-padding: 15px 20px;
+  padding: 15px 20px;
   background-color: #fff;
   font-family: "Nanum1";
 `;
