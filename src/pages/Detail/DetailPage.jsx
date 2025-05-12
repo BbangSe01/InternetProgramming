@@ -24,35 +24,26 @@ const DetailPage = () => {
   console.log(detailData);
   return detailData.length > 0 ? (
     <DetailArea>
-      <PosterLink>
-        <Poster src={detailData[0]?.poster} />
-        {detailData[0]?.relates[0]?.relateurl ? (
-          <LinkButton
-            onClick={() =>
-              window.open(detailData[0].relates[0].relateurl, "_blank")
-            }
-          >
-            예매
-          </LinkButton>
-        ) : null}
-      </PosterLink>
-      <Explaination>
+      <Poster src={detailData[0]?.poster} />
+      <ExplainArea>
         <Title>{detailData[0]?.prfnm}</Title>
-        <EachBlock>
-          <EachCate>공연장</EachCate>
-          <EachData>{detailData[0]?.fcltynm}</EachData>
-        </EachBlock>
-        <EachBlock>
-          <EachCate>공연기간</EachCate>
-          <EachData>
-            {detailData[0]?.prfpdfrom}~{detailData[0]?.prfpdto}
-          </EachData>
-        </EachBlock>
-        <EachBlock>
-          <EachCate>관람연령</EachCate>
-          <EachData>{detailData[0]?.prfage}</EachData>
-        </EachBlock>
-        <EachBlock>
+        <Explaination>
+          <LeftEx>
+            <EachBlock>
+              <EachCate>공연장</EachCate>
+              <EachData>{detailData[0]?.fcltynm}</EachData>
+            </EachBlock>
+            <EachBlock>
+              <EachCate>공연기간</EachCate>
+              <EachData>
+                {detailData[0]?.prfpdfrom}~{detailData[0]?.prfpdto}
+              </EachData>
+            </EachBlock>
+            <EachBlock>
+              <EachCate>관람연령</EachCate>
+              <EachData>{detailData[0]?.prfage}</EachData>
+            </EachBlock>
+            {/* <EachBlock>
           <EachCate>가격</EachCate>
           <Prices>
             {[...detailData[0]?.pcseguidance.split("원,")].map(
@@ -63,16 +54,39 @@ const DetailPage = () => {
               )
             )}
           </Prices>
-        </EachBlock>
-        <EachBlock>
-          <EachCate>출연진</EachCate>
-          <EachData>{detailData[0]?.prfcast}</EachData>
-        </EachBlock>
-        <EachBlock>
-          <EachCate>런 타임</EachCate>
-          <EachData>{detailData[0]?.prfruntime}</EachData>
-        </EachBlock>
-      </Explaination>
+          </EachBlock> */}
+            <EachBlock>
+              <EachCate>출연진</EachCate>
+              <EachData>{detailData[0]?.prfcast}</EachData>
+            </EachBlock>
+            <EachBlock>
+              <EachCate>런 타임</EachCate>
+              <EachData>{detailData[0]?.prfruntime}</EachData>
+            </EachBlock>
+          </LeftEx>
+          <RightEx>
+            <EachCate>가격</EachCate>
+            <Prices>
+              {[...detailData[0]?.pcseguidance.split("원,")].map(
+                (price, idx, arr) => (
+                  <EachPrice key={idx}>
+                    {idx !== arr.length - 1 ? `${price}원` : price}
+                  </EachPrice>
+                )
+              )}
+            </Prices>
+          </RightEx>
+        </Explaination>
+        {detailData[0]?.relates[0]?.relateurl ? (
+          <LinkButton
+            onClick={() =>
+              window.open(detailData[0].relates[0].relateurl, "_blank")
+            }
+          >
+            예매
+          </LinkButton>
+        ) : null}
+      </ExplainArea>
     </DetailArea>
   ) : null;
 };
@@ -81,31 +95,31 @@ export default DetailPage;
 
 const DetailArea = styled.div`
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   width: 90%;
   margin-top: 70px;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
   font-family: "Nanum1";
   // background-color: green;
 `;
 
-const PosterLink = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 50px;
-  // background-color: black;
-`;
+// const PosterLink = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   margin-bottom: 50px;
+//   background-color: black;
+// `;
 
 const Poster = styled.img`
-  width: 440px;
-  height: 588px;
-  margin-bottom: 34px;
+  width: 315px;
+  height: 420px;
 `;
 
 const LinkButton = styled.div`
   width: 440px;
   height: 52px;
   display: flex;
+  margin-top:-20px;
   align-items: center;
   justify-content: center;
   color: white;
@@ -115,37 +129,60 @@ const LinkButton = styled.div`
   cursor: pointer;
 `;
 
-const Explaination = styled.div`
+const ExplainArea = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 49px;
+  align-items: center;
+  margin-left: 82px;
   // background-color: pink;
+`;
+
+const Explaination = styled.div`
+  display: flex;
+  // margin-bottom: 126px;
+`;
+const LeftEx = styled.div`
+  width: 500px;
+  height: 420px;
+  display: flex;
+  // background-color: black;
+  flex-direction: column;
+  margin-right: 57px;
 `;
 
 const Title = styled.p`
   font-size: 40px;
-  // background-color: green;
+  width: 100%;
   margin-top: 0px;
-  margin-bottom: 75px;
 `;
 
 const EachBlock = styled.div`
   display: flex;
   font-size: 20px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
 `;
 
 const EachCate = styled.p`
-  width: 82px;
+  width: 173px;
+  flex-shrink: 0; // 너비 줄어드는 것 방지
+  // background-color: pink;
 `;
 const EachData = styled.p`
-  margin-left: 98px;
+  // margin-left: 98px;
 `;
 
 const Prices = styled.div`
-  margin-left: 98px;
+  display: flex;
+  flex-direction: column;
 `;
 const EachPrice = styled.p`
   height: 40px;
+  margin-left: -60px;
   margin-bottom: 22px;
+`;
+
+const RightEx = styled.div`
+  display: flex;
+  font-size: 20px;
+  // background-color: black;
 `;
