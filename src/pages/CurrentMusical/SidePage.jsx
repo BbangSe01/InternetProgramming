@@ -11,6 +11,10 @@ const SidePage = () => {
   const navigate = useNavigate();
   const [rankData, setRankData] = useState([]);
 
+  const goToDetail = (performId) => {
+    navigate(`/DetailPage/${performId}`);
+  };
+
   useEffect(() => {
     const getRankData = async () => {
       try {
@@ -26,13 +30,9 @@ const SidePage = () => {
     getRankData();
   }, []);
 
-  const goToDetail = () => {
-    navigate("/DetailPage");
-  };
-// console.log(rankData);
-  // console.log(curBanner);/
+  console.log(rankData);
   return (
-    <SideArea onClick={() => goToDetail()}>
+    <SideArea>
       <Swiper
         key={rankData.length}
         modules={[Autoplay, EffectFade]}
@@ -44,7 +44,10 @@ const SidePage = () => {
         loop={true}
       >
         {rankData.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide
+            key={index}
+            onClick={() => goToDetail(item.performanceId)}
+          >
             <SlideWrapper>
               <SideImg src={item.posterUrl} alt={item.performanceName} />
               <Explaination>
