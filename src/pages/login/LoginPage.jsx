@@ -39,8 +39,15 @@ const LoginPage = () => {
         window.location.href = "/";
       } catch (error) {
         console.error("❌ 로그인 처리 실패:", error);
-        alert("로그인 처리에 실패했습니다. 다시 시도해주세요.");
-        navigate("/");
+        setTimeout(() => {
+          const token = localStorage.getItem("accessToken");
+          if (token) {
+            window.location.href = "/";
+          } else {
+            alert("로그인 처리에 실패했습니다. 다시 시도해주세요.");
+            navigate("/");
+          }
+        }, 1000);
       }
     };
 
