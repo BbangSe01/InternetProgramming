@@ -5,7 +5,7 @@ import MoreCard from "../CurrentMusical/Blocks/Slice/MoreCard";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getCateData from "../../hooks/getCateData";
-import loadingSpinner from "../../assets/images/loading.gif";
+import loadingSpinner from "../../assets/images/loading2.gif";
 
 const MorePage = () => {
   const location = useLocation();
