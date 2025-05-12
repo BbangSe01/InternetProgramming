@@ -1,11 +1,14 @@
-import React from "react";
 import styled from "styled-components";
-import Dimg from "../../../../assets/images/dummyImg.svg";
-
+import { useNavigate } from "react-router-dom";
 const MoreCard = (data) => {
   console.log(data);
+  const navigate = useNavigate();
+
+  const goToDetail = (performId) => {
+    navigate(`/DetailPage/${performId}`);
+  };
   return (
-    <Card>
+    <Card onClick={() => goToDetail(data.data.performId)}>
       <CardImg src={data.data.posterUrl} alt="포스터" />
       <CardCate>{data.data.genreName}</CardCate>
       <CardTitle>{data.data.performName}</CardTitle>

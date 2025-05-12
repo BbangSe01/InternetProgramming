@@ -1,23 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../apis/axiosInstance";
 import styled from "styled-components";
-import SidebarImg from "../../assets/images/sideMusical.svg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-fade";
 import { useNavigate } from "react-router-dom";
 const SidePage = () => {
   const navigate = useNavigate();
+  const [rankData, setRankData] = useState([]);
 
-  const goToDetail = () => {
-    navigate("/DetailPage");
+  const goToDetail = (performId) => {
+    navigate(`/DetailPage/${performId}`);
   };
 
+  useEffect(() => {
+    const getRankData = async () => {
+      try {
+        const response = await axiosInstance.get("ranks");
+        console.log(response);
+        const topFiveRanks = response.data.ranks.slice(0, 4);
+        setRankData(topFiveRanks);
+      } catch (error) {
+        console.error("데이터 에러:", error);
+      }
+    };
+
+    getRankData();
+  }, []);
+
+  console.log(rankData);
   return (
-    <SideArea onClick={() => goToDetail()}>
-      <SideImg src={SidebarImg} alt="사이드바 이미지" />
-      <Explaination>
-        <SideCate>뮤지컬</SideCate>
-        <SideTitle>라이카</SideTitle>
-        <SideDate>2025.03.18 ~ 2025.05.18</SideDate>
-        <SideLocation>연강홀</SideLocation>
-      </Explaination>
+    <SideArea>
+      <Swiper
+        key={rankData.length}
+        modules={[Autoplay, EffectFade]}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        effect="fade"
+        loop={true}
+      >
+        {rankData.map((item, index) => (
+          <SwiperSlide
+            key={index}
+            onClick={() => goToDetail(item.performanceId)}
+          >
+            <SlideWrapper>
+              <SideImg src={item.posterUrl} alt={item.performanceName} />
+              <Explaination>
+                <SideCate>{item.category}</SideCate>
+                <SideTitle>{item.performanceName}</SideTitle>
+                <SideDate>{item.period}</SideDate>
+                <SideLocation>{item.placeName}</SideLocation>
+              </Explaination>
+            </SlideWrapper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </SideArea>
   );
 };
@@ -26,41 +68,48 @@ export default SidePage;
 
 const SideArea = styled.div`
   width: 27%;
-  position: fixed; // 💥 화면에 고정
+  position: fixed;
   min-height: 100%;
   top: 70px;
   left: 0;
   box-shadow: 5px 5px 18px gray;
   cursor: pointer;
+  overflow: hidden;
 `;
 
 const SideImg = styled.img`
   width: 100%;
-  object-fit: cover;
+  height: 65vh;
+`;
+
+const SlideWrapper = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
 const Explaination = styled.div`
+padding: 15px 20px;
+  background-color: #fff;
   font-family: "Nanum1";
-  margin-left: 40px;
 `;
 
 const SideCate = styled.p`
   margin-bottom: 18px;
-  font-size: 12px;
+  font-size: 13px;
 `;
 
 const SideTitle = styled.p`
-  font-size: 24px;
+  font-size: 18px;
   margin-bottom: 27px;
 `;
 
 const SideDate = styled.p`
-  font-size: 11px;
+  font-size: 13px;
   margin-bottom: 13px;
   color: #8d8d8d;
 `;
 
 const SideLocation = styled.p`
-  font-size: 11px;
+  font-size: 13px;
   color: #8d8d8d;
 `;
