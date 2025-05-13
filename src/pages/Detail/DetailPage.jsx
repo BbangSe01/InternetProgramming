@@ -10,6 +10,11 @@ const DetailPage = () => {
   // url에서 performId 추출
   const { id: performId } = useParams();
   const [detailData, setDetailData] = useState([]);
+  const [isLogIn, setIsLogIn] = useState([]);
+
+  useEffect(() => {
+    setIsLogIn(!!localStorage.getItem("accessToken"));
+  }, []);
 
   useEffect(() => {
     const getDetailData = async () => {
@@ -25,11 +30,23 @@ const DetailPage = () => {
     getDetailData();
   }, [performId]);
 
+  const setFavorites = () => {
+    if (isLogIn) {
+      // 즐겨찾기 post 로직
+    }
+  };
+
   return detailData.length > 0 ? (
     <DetailArea>
       <PosterArea>
         <Poster src={detailData[0]?.poster} />
-        <FavoriteBu>
+        <FavoriteBu
+          onClick={() => {
+            isLogIn
+              ? setFavorites()
+              : alert("로그인 후 즐겨찾기가 가능합니다.");
+          }}
+        >
           <img src={whiteHeart} />
         </FavoriteBu>
       </PosterArea>

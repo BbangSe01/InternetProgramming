@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 const RightDetail = (data) => {
-  console.log(data);
   return (
     <RightEx>
       <EachCate>가격</EachCate>

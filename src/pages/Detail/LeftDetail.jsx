@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 const LeftDetail = (data) => {
-  console.log(data);
   return (
     <LeftEx>
       <EachBlock>
