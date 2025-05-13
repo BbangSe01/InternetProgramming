@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axiosInstance from "../../apis/axiosInstance";
+import redHeart from "../../assets/images/redHeart.svg";
+import whiteHeart from "../../assets/images/whiteHeart.svg";
+import LeftDetail from "./LeftDetail";
+import RightDetail from "./RightDetail";
 import { useParams } from "react-router-dom";
 const DetailPage = () => {
-   // url에서 performId 추출
+  // url에서 performId 추출
   const { id: performId } = useParams();
   const [detailData, setDetailData] = useState([]);
 
@@ -21,61 +25,19 @@ const DetailPage = () => {
     getDetailData();
   }, [performId]);
 
-  console.log(detailData);
   return detailData.length > 0 ? (
     <DetailArea>
-      <Poster src={detailData[0]?.poster} />
+      <PosterArea>
+        <Poster src={detailData[0]?.poster} />
+        <FavoriteBu>
+          <img src={whiteHeart} />
+        </FavoriteBu>
+      </PosterArea>
       <ExplainArea>
         <Title>{detailData[0]?.prfnm}</Title>
         <Explaination>
-          <LeftEx>
-            <EachBlock>
-              <EachCate>공연장</EachCate>
-              <EachData>{detailData[0]?.fcltynm}</EachData>
-            </EachBlock>
-            <EachBlock>
-              <EachCate>공연기간</EachCate>
-              <EachData>
-                {detailData[0]?.prfpdfrom}~{detailData[0]?.prfpdto}
-              </EachData>
-            </EachBlock>
-            <EachBlock>
-              <EachCate>관람연령</EachCate>
-              <EachData>{detailData[0]?.prfage}</EachData>
-            </EachBlock>
-            {/* <EachBlock>
-          <EachCate>가격</EachCate>
-          <Prices>
-            {[...detailData[0]?.pcseguidance.split("원,")].map(
-              (price, idx, arr) => (
-                <EachPrice key={idx}>
-                  {idx !== arr.length - 1 ? `${price}원` : price}
-                </EachPrice>
-              )
-            )}
-          </Prices>
-          </EachBlock> */}
-            <EachBlock>
-              <EachCate>출연진</EachCate>
-              <EachData>{detailData[0]?.prfcast}</EachData>
-            </EachBlock>
-            <EachBlock>
-              <EachCate>런 타임</EachCate>
-              <EachData>{detailData[0]?.prfruntime}</EachData>
-            </EachBlock>
-          </LeftEx>
-          <RightEx>
-            <EachCate>가격</EachCate>
-            <Prices>
-              {[...detailData[0]?.pcseguidance.split("원,")].map(
-                (price, idx, arr) => (
-                  <EachPrice key={idx}>
-                    {idx !== arr.length - 1 ? `${price}원` : price}
-                  </EachPrice>
-                )
-              )}
-            </Prices>
-          </RightEx>
+          <LeftDetail data={detailData[0]} />
+          <RightDetail data={detailData[0]?.pcseguidance} />
         </Explaination>
         {detailData[0]?.relates[0]?.relateurl ? (
           <LinkButton
@@ -103,23 +65,29 @@ const DetailArea = styled.div`
   // background-color: green;
 `;
 
-// const PosterLink = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   margin-bottom: 50px;
-//   background-color: black;
-// `;
+const PosterArea = styled.div`
+  display: flex;
+  position: relative;
+`;
 
 const Poster = styled.img`
   width: 315px;
   height: 420px;
 `;
 
+const FavoriteBu = styled.div`
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 7px;
+  right: 3px;
+  cursor: pointer;
+`;
 const LinkButton = styled.div`
   width: 440px;
   height: 52px;
   display: flex;
-  margin-top:-20px;
+  margin-top: -20px;
   align-items: center;
   justify-content: center;
   color: white;
@@ -140,49 +108,11 @@ const ExplainArea = styled.div`
 const Explaination = styled.div`
   display: flex;
   // margin-bottom: 126px;
-`;
-const LeftEx = styled.div`
-  width: 500px;
-  height: 420px;
-  display: flex;
-  // background-color: black;
-  flex-direction: column;
-  margin-right: 57px;
+  margin-bottom: 63px;
 `;
 
 const Title = styled.p`
   font-size: 40px;
   width: 100%;
   margin-top: 0px;
-`;
-
-const EachBlock = styled.div`
-  display: flex;
-  font-size: 20px;
-  // margin-bottom: 20px;
-`;
-
-const EachCate = styled.p`
-  width: 173px;
-  flex-shrink: 0; // 너비 줄어드는 것 방지
-  // background-color: pink;
-`;
-const EachData = styled.p`
-  // margin-left: 98px;
-`;
-
-const Prices = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const EachPrice = styled.p`
-  height: 40px;
-  margin-left: -60px;
-  margin-bottom: 22px;
-`;
-
-const RightEx = styled.div`
-  display: flex;
-  font-size: 20px;
-  // background-color: black;
 `;
