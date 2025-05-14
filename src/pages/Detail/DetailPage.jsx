@@ -17,6 +17,7 @@ const DetailPage = () => {
   const dispatch = useDispatch();
   const ids = useSelector((state) => state.favorites.ids);
 
+  // 로그인 확인
   useEffect(() => {
     setIsLogIn(!!localStorage.getItem("accessToken"));
   }, []);
@@ -29,6 +30,7 @@ const DetailPage = () => {
     }
   }, [ids]);
 
+  // 상세페이지 데이터
   useEffect(() => {
     const getDetailData = async () => {
       try {
@@ -43,9 +45,9 @@ const DetailPage = () => {
     getDetailData();
   }, [performId]);
 
-  const setFavorites = ({ data, performId }) => {
-    dispatch(postFavorites({ data: data, performId: performId }));
-    setIsFavorites(!isFavorites);
+  const setFavorites = async ({ data, performId }) => {
+    await dispatch(postFavorites({ data: data, performId }));
+    await dispatch(fetchFavorites()); // 상태 동기화는 fetch로만 처리
   };
 
   return detailData.length > 0 ? (
