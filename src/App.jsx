@@ -6,6 +6,7 @@ import DetailPage from "./pages/Detail/DetailPage";
 import TicketingPage from "./pages/Ticketing/TicketingPage";
 import MorePage from "./pages/morePage/MorePage";
 import LoginPage from "./pages/login/loginPage";
+import FavoritesPage from "./pages/Favorites/FavoritesPage";
 import { BrowserRouter, Routes, Route } from "react-router";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ function App() {
             <Route path="/TicketingPage" element={<TicketingPage />} />
             <Route path="/MorePage" element={<MorePage />} />
             <Route path="/loginPage" element={<LoginPage />} />
+            <Route path="/favoritePage" element={<FavoritesPage />} />
           </Routes>
         </Screen>
       </BrowserRouter>

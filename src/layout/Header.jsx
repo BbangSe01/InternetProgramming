@@ -35,6 +35,9 @@ const Header = () => {
     }
   };
 
+  const goToFavorite = () => {
+    navigate("/favoritePage");
+  };
   return (
     <HeaderArea>
       <Title>MUDAE for</Title>
@@ -49,7 +52,7 @@ const Header = () => {
           {isLogin ? "로그아웃" : "로그인"}
         </Login>
         {isLogin ? (
-          <Favorites>
+          <Favorites onClick={() => goToFavorite()}>
             <img src={Heart} alt="즐겨찾기" />
           </Favorites>
         ) : null}
