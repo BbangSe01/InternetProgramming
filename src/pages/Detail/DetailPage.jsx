@@ -50,35 +50,38 @@ const DetailPage = () => {
     await dispatch(fetchFavorites()); // 상태 동기화는 fetch로만 처리
   };
 
+  console.log(detailData);
   return detailData.length > 0 ? (
     <DetailArea>
-      <PosterArea>
-        <Poster src={detailData[0]?.poster} />
-        <FavoriteBu
-          onClick={() => {
-            isLogIn
-              ? setFavorites({ data: detailData[0], performId })
-              : alert("로그인 후 즐겨찾기가 가능합니다.");
-          }}
-        >
-          <ButtonImg src={isFavorites ? redHeart : whiteHeart} />
-        </FavoriteBu>
-      </PosterArea>
+      <Title>{detailData[0]?.prfnm}</Title>
       <ExplainArea>
-        <Title>{detailData[0]?.prfnm}</Title>
-        <Explaination>
-          <LeftDetail data={detailData[0]} />
-          <RightDetail data={detailData[0]?.pcseguidance} />
-        </Explaination>
-        {detailData[0]?.relates[0]?.relateurl ? (
-          <LinkButton
-            onClick={() =>
-              window.open(detailData[0].relates[0].relateurl, "_blank")
-            }
+        <PosterArea>
+          <Poster src={detailData[0]?.poster} />
+          <FavoriteBu
+            onClick={() => {
+              isLogIn
+                ? setFavorites({ data: detailData[0], performId })
+                : alert("로그인 후 즐겨찾기가 가능합니다.");
+            }}
           >
-            예매
-          </LinkButton>
-        ) : null}
+            <ButtonImg src={isFavorites ? redHeart : whiteHeart} />
+          </FavoriteBu>
+        </PosterArea>
+        <Explaination>
+          <Detail>
+            <LeftDetail data={detailData[0]} />
+            <RightDetail data={detailData[0]?.pcseguidance} />
+          </Detail>
+          {detailData[0]?.relates[0]?.relateurl ? (
+            <LinkButton
+              onClick={() =>
+                window.open(detailData[0].relates[0].relateurl, "_blank")
+              }
+            >
+              예매
+            </LinkButton>
+          ) : null}
+        </Explaination>
       </ExplainArea>
     </DetailArea>
   ) : null;
@@ -88,12 +91,13 @@ export default DetailPage;
 
 const DetailArea = styled.div`
   display: flex;
-  // justify-content: center;
-  width: 90%;
-  margin-top: 70px;
-  margin-bottom: 30px;
+  flex-direction: column;
+  width: 1570px;
+  // margin-left: 152px;
+  // margin-top: 70px;
+  // margin-bottom: 30px;
   font-family: "Nanum1";
-  // background-color: green;
+  /* background-color: green; */
 `;
 
 const PosterArea = styled.div`
@@ -124,7 +128,7 @@ const LinkButton = styled.div`
   width: 440px;
   height: 52px;
   display: flex;
-  margin-top: -20px;
+  margin-top: 75px;
   align-items: center;
   justify-content: center;
   color: white;
@@ -136,21 +140,29 @@ const LinkButton = styled.div`
 
 const ExplainArea = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 82px;
-  // background-color: pink;
+  margin-left: 152px;
+  /* background-color: pink; */
 `;
 
 const Explaination = styled.div`
   display: flex;
-  // margin-bottom: 126px;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 63px;
-  // background-color: black;
+  /* background-color: black; */
 `;
 
+const Detail = styled.div`
+  /* width: 785px; */
+  height: 427px;
+  /* background-color: black; */
+  display: flex;
+  // justify-content: center;
+  margin-left: 59px;
+`;
 const Title = styled.p`
   font-size: 40px;
   width: 100%;
-  margin-top: 0px;
+  margin-left: 152px;
+  // margin-top: 0px;
 `;

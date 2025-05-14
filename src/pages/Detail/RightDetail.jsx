@@ -18,20 +18,23 @@ const RightDetail = (data) => {
 export default RightDetail;
 
 const EachCate = styled.p`
-  width: 173px;
   flex-shrink: 0; // 너비 줄어드는 것 방지
+  margin-right: 103px;
 `;
 const Prices = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 const EachPrice = styled.p`
-  height: 40px;
+  /* height: 40px;
   margin-left: -60px;
-  margin-bottom: 22px;
+  margin-bottom: 22px; */
 `;
 
 const RightEx = styled.div`
   display: flex;
   font-size: 20px;
+  margin-left: 80px;
+  /* background-color: green; */
 `;

@@ -32,11 +32,13 @@ const LeftDetail = (data) => {
 export default LeftDetail;
 
 const LeftEx = styled.div`
-  width: 500px;
-  height: 420px;
+  width: 400px;
+  /* height: 322px; */
   display: flex;
   flex-direction: column;
-  margin-right: 57px;
+  justify-content: space-between;
+  border-right: 1px solid black;
+  padding-right: 72px;
 `;
 
 const EachBlock = styled.div`
@@ -46,6 +48,7 @@ const EachBlock = styled.div`
 
 const EachData = styled.p``;
 const EachCate = styled.p`
-  width: 173px;
+  width: 80px;
+  margin-right: 60px;
   flex-shrink: 0; // 너비 줄어드는 것 방지
 `;
