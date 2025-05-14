@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../apis/axiosInstance";
 import Heart from "../assets/images/Heart.svg";
 import searchIcon from "../assets/images/searchIcon.svg";
-
+import { useDispatch } from "react-redux";
+import { clearFavorites } from "../stores/favoritesSlice";
 const Header = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogIn] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -18,6 +20,7 @@ const Header = () => {
     if (isLogin) {
       localStorage.removeItem("accessToken");
       setIsLogIn(false);
+      dispatch(clearFavorites());
       alert("로그아웃 되었습니다.");
       window.location.href = "/";
     } else {
