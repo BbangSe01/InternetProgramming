@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../apis/axiosInstance";
 import Heart from "../assets/images/Heart.svg";
 import searchIcon from "../assets/images/searchIcon.svg";
-
+import { useDispatch } from "react-redux";
+import { clearFavorites } from "../stores/favoritesSlice";
 const Header = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogIn] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -18,6 +20,7 @@ const Header = () => {
     if (isLogin) {
       localStorage.removeItem("accessToken");
       setIsLogIn(false);
+      dispatch(clearFavorites());
       alert("로그아웃 되었습니다.");
       window.location.href = "/";
     } else {
@@ -31,10 +34,14 @@ const Header = () => {
       }
     }
   };
-
+  const goToFavorite = () => {
+    navigate("/favoritePage");
+  };
   return (
     <HeaderArea>
-      <Title>MUDAE for</Title>
+      <Title>
+        <Link to="/">MUDAE for</Link>
+      </Title>
       <Category>
         <Performances>
           <Link to="/">공연 둘러보기</Link>
@@ -46,7 +53,7 @@ const Header = () => {
           {isLogin ? "로그아웃" : "로그인"}
         </Login>
         {isLogin ? (
-          <Favorites>
+          <Favorites onClick={() => goToFavorite()}>
             <img src={Heart} alt="즐겨찾기" />
           </Favorites>
         ) : null}
@@ -79,6 +86,10 @@ const Title = styled.p`
   margin-left: 3%;
   font-family: "Nanum1";
   font-size: 24px;
+  a {
+    color: black; // 글씨색 변경
+    text-decoration: none; // 밑줄 제거
+  }
 `;
 
 const Category = styled.div`

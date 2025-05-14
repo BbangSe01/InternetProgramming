@@ -1,12 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import SidePage from "./SidePage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CategoryButton from "./Blocks/CategoryButton";
 import SliceArea from "./Blocks/SliceArea";
+import { fetchFavorites, postFavorites } from "../../stores/favoritesSlice";
+import { useDispatch } from "react-redux";
 const CurMusicalPage = () => {
   const [genreClick, setGenreClick] = useState(true);
   const [locClick, setLocClick] = useState(false);
+
+  const dispatch = useDispatch();
+
+  // 즐겨찾기 데이터 받아오기
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
 
   const onClickLoc = () => {
     setGenreClick(false);

@@ -2,3 +2,6 @@
   font-family: 'Nanum1';
   src: url('./assets//font/NanumSquareNeo-cBd.ttf');
 }
+body {
+  overflow-x: hidden;
+}

@@ -24,8 +24,6 @@ export default MoreCard;
 const Card = styled.div`
   width: 253px;
   height: 458px;
-  margin-left: 15px;
-  margin-right: 15px;
   margin-bottom: 125px;
   display: flex;
   flex-direction: column;

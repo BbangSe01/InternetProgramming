@@ -90,9 +90,10 @@ const Title = styled.div`
 
 const InfiniteArea = styled.div`
   display: flex;
-  width: 1450px;
-  flex-wrap: wrap;
   justify-content: space-evenly;
+  width: 1490px;
+  flex-wrap: wrap;
+  // background-color: green;
 `;
 
 const ObserverTag = styled.div`

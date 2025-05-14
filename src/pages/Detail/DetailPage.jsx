@@ -1,12 +1,36 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axiosInstance from "../../apis/axiosInstance";
+import redHeart from "../../assets/images/redHeart.svg";
+import whiteHeart from "../../assets/images/whiteHeart.svg";
+import LeftDetail from "./LeftDetail";
+import RightDetail from "./RightDetail";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchFavorites, postFavorites } from "../../stores/favoritesSlice";
 const DetailPage = () => {
-   // url에서 performId 추출
+  // url에서 performId 추출
   const { id: performId } = useParams();
   const [detailData, setDetailData] = useState([]);
+  const [isLogIn, setIsLogIn] = useState([]);
+  const [isFavorites, setIsFavorites] = useState([]);
+  const dispatch = useDispatch();
+  const ids = useSelector((state) => state.favorites.ids);
 
+  // 로그인 확인
+  useEffect(() => {
+    setIsLogIn(!!localStorage.getItem("accessToken"));
+  }, []);
+
+  useEffect(() => {
+    if (Array.isArray(ids) && ids.includes(performId)) {
+      setIsFavorites(true);
+    } else {
+      setIsFavorites(false);
+    }
+  }, [ids]);
+
+  // 상세페이지 데이터
   useEffect(() => {
     const getDetailData = async () => {
       try {
@@ -21,71 +45,43 @@ const DetailPage = () => {
     getDetailData();
   }, [performId]);
 
+  const setFavorites = async ({ data, performId }) => {
+    await dispatch(postFavorites({ data: data, performId }));
+    await dispatch(fetchFavorites()); // 상태 동기화는 fetch로만 처리
+  };
+
   console.log(detailData);
   return detailData.length > 0 ? (
     <DetailArea>
-      <Poster src={detailData[0]?.poster} />
+      <Title>{detailData[0]?.prfnm}</Title>
       <ExplainArea>
-        <Title>{detailData[0]?.prfnm}</Title>
-        <Explaination>
-          <LeftEx>
-            <EachBlock>
-              <EachCate>공연장</EachCate>
-              <EachData>{detailData[0]?.fcltynm}</EachData>
-            </EachBlock>
-            <EachBlock>
-              <EachCate>공연기간</EachCate>
-              <EachData>
-                {detailData[0]?.prfpdfrom}~{detailData[0]?.prfpdto}
-              </EachData>
-            </EachBlock>
-            <EachBlock>
-              <EachCate>관람연령</EachCate>
-              <EachData>{detailData[0]?.prfage}</EachData>
-            </EachBlock>
-            {/* <EachBlock>
-          <EachCate>가격</EachCate>
-          <Prices>
-            {[...detailData[0]?.pcseguidance.split("원,")].map(
-              (price, idx, arr) => (
-                <EachPrice key={idx}>
-                  {idx !== arr.length - 1 ? `${price}원` : price}
-                </EachPrice>
-              )
-            )}
-          </Prices>
-          </EachBlock> */}
-            <EachBlock>
-              <EachCate>출연진</EachCate>
-              <EachData>{detailData[0]?.prfcast}</EachData>
-            </EachBlock>
-            <EachBlock>
-              <EachCate>런 타임</EachCate>
-              <EachData>{detailData[0]?.prfruntime}</EachData>
-            </EachBlock>
-          </LeftEx>
-          <RightEx>
-            <EachCate>가격</EachCate>
-            <Prices>
-              {[...detailData[0]?.pcseguidance.split("원,")].map(
-                (price, idx, arr) => (
-                  <EachPrice key={idx}>
-                    {idx !== arr.length - 1 ? `${price}원` : price}
-                  </EachPrice>
-                )
-              )}
-            </Prices>
-          </RightEx>
-        </Explaination>
-        {detailData[0]?.relates[0]?.relateurl ? (
-          <LinkButton
-            onClick={() =>
-              window.open(detailData[0].relates[0].relateurl, "_blank")
-            }
+        <PosterArea>
+          <Poster src={detailData[0]?.poster} />
+          <FavoriteBu
+            onClick={() => {
+              isLogIn
+                ? setFavorites({ data: detailData[0], performId })
+                : alert("로그인 후 즐겨찾기가 가능합니다.");
+            }}
           >
-            예매
-          </LinkButton>
-        ) : null}
+            <ButtonImg src={isFavorites ? redHeart : whiteHeart} />
+          </FavoriteBu>
+        </PosterArea>
+        <Explaination>
+          <Detail>
+            <LeftDetail data={detailData[0]} />
+            <RightDetail data={detailData[0]?.pcseguidance} />
+          </Detail>
+          {detailData[0]?.relates[0]?.relateurl ? (
+            <LinkButton
+              onClick={() =>
+                window.open(detailData[0].relates[0].relateurl, "_blank")
+              }
+            >
+              예매
+            </LinkButton>
+          ) : null}
+        </Explaination>
       </ExplainArea>
     </DetailArea>
   ) : null;
@@ -95,31 +91,44 @@ export default DetailPage;
 
 const DetailArea = styled.div`
   display: flex;
-  // justify-content: center;
-  width: 90%;
-  margin-top: 70px;
-  margin-bottom: 30px;
+  flex-direction: column;
+  width: 1570px;
+  // margin-left: 152px;
+  // margin-top: 70px;
+  // margin-bottom: 30px;
   font-family: "Nanum1";
-  // background-color: green;
+  /* background-color: green; */
 `;
 
-// const PosterLink = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   margin-bottom: 50px;
-//   background-color: black;
-// `;
+const PosterArea = styled.div`
+  display: flex;
+  position: relative;
+`;
 
 const Poster = styled.img`
   width: 315px;
   height: 420px;
 `;
 
+const FavoriteBu = styled.div`
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  cursor: pointer;
+  // background-color: black;
+`;
+
+const ButtonImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
 const LinkButton = styled.div`
   width: 440px;
   height: 52px;
   display: flex;
-  margin-top:-20px;
+  margin-top: 75px;
   align-items: center;
   justify-content: center;
   color: white;
@@ -131,58 +140,29 @@ const LinkButton = styled.div`
 
 const ExplainArea = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 82px;
-  // background-color: pink;
+  margin-left: 152px;
+  /* background-color: pink; */
 `;
 
 const Explaination = styled.div`
   display: flex;
-  // margin-bottom: 126px;
-`;
-const LeftEx = styled.div`
-  width: 500px;
-  height: 420px;
-  display: flex;
-  // background-color: black;
   flex-direction: column;
-  margin-right: 57px;
+  align-items: center;
+  margin-bottom: 63px;
+  /* background-color: black; */
 `;
 
+const Detail = styled.div`
+  /* width: 785px; */
+  height: 427px;
+  /* background-color: black; */
+  display: flex;
+  // justify-content: center;
+  margin-left: 59px;
+`;
 const Title = styled.p`
   font-size: 40px;
   width: 100%;
-  margin-top: 0px;
-`;
-
-const EachBlock = styled.div`
-  display: flex;
-  font-size: 20px;
-  // margin-bottom: 20px;
-`;
-
-const EachCate = styled.p`
-  width: 173px;
-  flex-shrink: 0; // 너비 줄어드는 것 방지
-  // background-color: pink;
-`;
-const EachData = styled.p`
-  // margin-left: 98px;
-`;
-
-const Prices = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const EachPrice = styled.p`
-  height: 40px;
-  margin-left: -60px;
-  margin-bottom: 22px;
-`;
-
-const RightEx = styled.div`
-  display: flex;
-  font-size: 20px;
-  // background-color: black;
+  margin-left: 152px;
+  // margin-top: 0px;
 `;
