@@ -6,15 +6,28 @@ import whiteHeart from "../../assets/images/whiteHeart.svg";
 import LeftDetail from "./LeftDetail";
 import RightDetail from "./RightDetail";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchFavorites, postFavorites } from "../../stores/favoritesSlice";
 const DetailPage = () => {
   // url에서 performId 추출
   const { id: performId } = useParams();
   const [detailData, setDetailData] = useState([]);
   const [isLogIn, setIsLogIn] = useState([]);
+  const [isFavorites, setIsFavorites] = useState([]);
+  const dispatch = useDispatch();
+  const ids = useSelector((state) => state.favorites.ids);
 
   useEffect(() => {
     setIsLogIn(!!localStorage.getItem("accessToken"));
   }, []);
+
+  useEffect(() => {
+    if (Array.isArray(ids) && ids.includes(performId)) {
+      setIsFavorites(true);
+    } else {
+      setIsFavorites(false);
+    }
+  }, [ids]);
 
   useEffect(() => {
     const getDetailData = async () => {
@@ -30,10 +43,9 @@ const DetailPage = () => {
     getDetailData();
   }, [performId]);
 
-  const setFavorites = () => {
-    if (isLogIn) {
-      // 즐겨찾기 post 로직
-    }
+  const setFavorites = ({ data, performId }) => {
+    dispatch(postFavorites({ data: data, performId: performId }));
+    setIsFavorites(!isFavorites);
   };
 
   return detailData.length > 0 ? (
@@ -43,11 +55,11 @@ const DetailPage = () => {
         <FavoriteBu
           onClick={() => {
             isLogIn
-              ? setFavorites()
+              ? setFavorites({ data: detailData[0], performId })
               : alert("로그인 후 즐겨찾기가 가능합니다.");
           }}
         >
-          <img src={whiteHeart} />
+          <ButtonImg src={isFavorites ? redHeart : whiteHeart} />
         </FavoriteBu>
       </PosterArea>
       <ExplainArea>
@@ -93,12 +105,18 @@ const Poster = styled.img`
 `;
 
 const FavoriteBu = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 38px;
+  height: 38px;
   position: absolute;
   top: 7px;
-  right: 3px;
+  right: 9px;
   cursor: pointer;
+  // background-color: black;
+`;
+
+const ButtonImg = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 const LinkButton = styled.div`
   width: 440px;
@@ -126,6 +144,7 @@ const Explaination = styled.div`
   display: flex;
   // margin-bottom: 126px;
   margin-bottom: 63px;
+  // background-color: black;
 `;
 
 const Title = styled.p`
