@@ -1,21 +1,20 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-// 더보기 페이지 카드와 동일한 UI로 진행하기 위함
+import { useSelector } from "react-redux";
 import MoreCard from "../CurrentMusical/Blocks/Slice/MoreCard";
 import { useLocation } from "react-router";
+
 const FavoritesPage = () => {
-  // 즐겨찾기 전체 데이터 받아오기
   const Favorites = useSelector((state) => state.favorites.items);
   const location = useLocation();
-  console.log(Favorites);
+
   return (
     <Screen key={location.key}>
       <Title>즐겨찾기</Title>
       <FavoritesArea>
-        {Favorites.map((data) => {
-          return <MoreCard data={data} />;
-        })}
+        {Favorites.map((data) => (
+          <MoreCard key={data.performId} data={data} />
+        ))}
       </FavoritesArea>
     </Screen>
   );
