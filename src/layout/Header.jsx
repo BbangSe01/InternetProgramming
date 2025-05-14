@@ -34,13 +34,14 @@ const Header = () => {
       }
     }
   };
-
   const goToFavorite = () => {
     navigate("/favoritePage");
   };
   return (
     <HeaderArea>
-      <Title>MUDAE for</Title>
+      <Title>
+        <Link to="/">MUDAE for</Link>
+      </Title>
       <Category>
         <Performances>
           <Link to="/">공연 둘러보기</Link>
@@ -85,6 +86,10 @@ const Title = styled.p`
   margin-left: 3%;
   font-family: "Nanum1";
   font-size: 24px;
+  a {
+    color: black; // 글씨색 변경
+    text-decoration: none; // 밑줄 제거
+  }
 `;
 
 const Category = styled.div`
