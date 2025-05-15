@@ -24,7 +24,6 @@ const EachCate = styled.p`
 const Prices = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 const EachPrice = styled.p`
   /* height: 40px;
