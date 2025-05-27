@@ -97,12 +97,13 @@ const DetailArea = styled.div`
   // margin-top: 70px;
   // margin-bottom: 30px;
   font-family: "Nanum1";
-  /* background-color: green; */
+  /* background-color: yellow; */
 `;
 
 const PosterArea = styled.div`
   display: flex;
   position: relative;
+  margin-right: 60px;
 `;
 
 const Poster = styled.img`
@@ -125,8 +126,8 @@ const ButtonImg = styled.img`
   height: 100%;
 `;
 const LinkButton = styled.div`
-  width: 440px;
-  height: 52px;
+  width: 350px;
+  height: 37px;
   display: flex;
   margin-top: 75px;
   align-items: center;
@@ -134,8 +135,9 @@ const LinkButton = styled.div`
   color: white;
   background-color: #2c2c2c;
   border-radius: 20px;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
+  margin-left: 140px;
 `;
 
 const ExplainArea = styled.div`
@@ -150,15 +152,16 @@ const Explaination = styled.div`
   align-items: center;
   margin-bottom: 63px;
   /* background-color: black; */
+  /* width: 785px; */
 `;
 
 const Detail = styled.div`
-  /* width: 785px; */
-  height: 427px;
+  width: 850px;
+  height: 420px;
   /* background-color: black; */
   display: flex;
   // justify-content: center;
-  margin-left: 59px;
+  /* margin-left: 59px; */
 `;
 const Title = styled.p`
   font-size: 40px;

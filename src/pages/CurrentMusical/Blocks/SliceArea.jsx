@@ -83,7 +83,7 @@ const SliceArea = ({ dataType }) => {
             </MoreButton>
           </NameAndButton>
           <Swiper
-          modules={[Scrollbar]}
+            modules={[Scrollbar]}
             spaceBetween={30}
             slidesPerView={3.8}
             scrollbar={{ draggable: true }}

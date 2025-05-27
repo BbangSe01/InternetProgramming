@@ -32,13 +32,12 @@ const LeftDetail = (data) => {
 export default LeftDetail;
 
 const LeftEx = styled.div`
-  width: 400px;
-  /* height: 322px; */
+  flex: 0 0 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid black;
-  padding-right: 72px;
+  padding-right: 70px;
 `;
 
 const EachBlock = styled.div`

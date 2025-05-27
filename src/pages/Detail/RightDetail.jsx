@@ -34,6 +34,6 @@ const EachPrice = styled.p`
 const RightEx = styled.div`
   display: flex;
   font-size: 20px;
-  margin-left: 80px;
-  /* background-color: green; */
+  flex: 0 0 50%;
+  padding-left: 70px;
 `;
