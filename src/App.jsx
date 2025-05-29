@@ -5,7 +5,7 @@ import CurMusicalPage from "./pages/CurrentMusical/CurMusicalPage";
 import DetailPage from "./pages/Detail/DetailPage";
 import TicketingPage from "./pages/Ticketing/TicketingPage";
 import MorePage from "./pages/morePage/MorePage";
-import LoginPage from "./pages/login/loginPage";
+import LoginPage from "./pages/login/LoginPage";
 import FavoritesPage from "./pages/Favorites/FavoritesPage";
 import { BrowserRouter, Routes, Route } from "react-router";
 
