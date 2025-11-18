@@ -16,7 +16,7 @@
 | **Design** | CSS 등 사용자 UI 디자인 변경, 수정, 제작 |
 
 <br/><br>
-### 🚀 NOTION 링크
+### 🚀 프로젝트 설명
 https://www.notion.so/MODAE_For-20235f530e2580289aaceef9dfa83589
 <br><br>
 
